@@ -128,7 +128,7 @@ static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   return count;
 }
 
-#else  // OPENSSL_VERSION_NUMBER >= 0x10100000L
+#elif false  // OPENSSL_VERSION_NUMBER >= 0x10100000L
 
 static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   // In OpenSSL >= 1.1, BIGNUM is an opaque type, so d and top
@@ -151,6 +151,27 @@ static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   }
   return count;
 }
+
+#else
+//tklebanoff modification -- libreSSL
+
+static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
+  int count = 0;
+  for (int i = 0; i < bn->top; ++i) {
+    BN_ULONG w = bn->d[i];
+    if (w == 0) {
+      count += 8 * sizeof(BN_ULONG);
+    } else {
+      for (; (w & 1) == 0; w >>= 1) {
+        ++count;
+      }
+      break;
+    }
+  }
+  return count;
+}
+
+
 
 #endif  // OPENSSL_VERSION_NUMBER >= 0x10100000L
 
