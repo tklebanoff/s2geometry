@@ -128,7 +128,8 @@ static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   return count;
 }
 
-#elif false  // OPENSSL_VERSION_NUMBER >= 0x10100000L
+//tklebanoff
+#elif true  // OPENSSL_VERSION_NUMBER >= 0x10100000L
 
 static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
   // In OpenSSL >= 1.1, BIGNUM is an opaque type, so d and top
