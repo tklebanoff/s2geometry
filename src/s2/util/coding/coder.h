@@ -461,10 +461,7 @@ inline void DecoderExtensions::FillArray(Decoder* array, int num_decoders) {
                 "Decoder must be trivially copy-assignable");
   static_assert(absl::is_trivially_destructible<Decoder>::value,
                 "Decoder must be trivially destructible");
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wclass-memaccess"
   std::memset(array, 0, num_decoders * sizeof(Decoder));
-#pragma GCC diagnostic pop
 }
 
 inline void Encoder::put8(unsigned char v) {
