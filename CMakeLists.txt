@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(s2-geometry)
+include(CTest)
 
 include(CMakeDependentOption)
 include(CheckCXXCompilerFlag)
