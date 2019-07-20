@@ -159,6 +159,8 @@ static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
 //tklebanoff modification -- libreSSL
 
 static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
+    assert(false); //lets see if we hit it
+#if 0
   int count = 0;
   for (int i = 0; i < bn->top; ++i) {
     BN_ULONG w = bn->d[i];
@@ -172,6 +174,7 @@ static int BN_ext_count_low_zero_bits(const BIGNUM* bn) {
     }
   }
   return count;
+#endif
 }
 
 
